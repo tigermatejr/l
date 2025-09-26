@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Download This Video</title>
+
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body, html {
+    height: 100%;
+    font-family: 'Arial', sans-serif;
+  }
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    color: #fff;
+  }
+
+  .container {
+    background: rgba(0,0,0,0.75);
+    padding: 30px 20px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 0 40px rgba(0,255,150,0.6);
+    width: 95%;
+    max-width: 500px;
+  }
+
+  h1 {
+    color: #00ff96;
+    margin-bottom: 20px;
+    font-size: 2rem;
+  }
+
+  img {
+    width: 100%;
+    max-height: 250px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin-bottom: 25px;
+  }
+
+  button {
+    width: 100%;
+    padding: 18px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 12px;
+    background: #00ff96;
+    color: #000;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-bottom: 15px;
+  }
+
+  button:hover {
+    background: #00cc76;
+  }
+
+  #countdown {
+    font-size: 1.1rem;
+    color: #ffea00;
+    margin-bottom: 10px;
+  }
+
+  /* Progress bar */
+  .progress-container {
+    width: 100%;
+    height: 8px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+
+  .progress-bar {
+    height: 100%;
+    width: 0%;
+    background: #00ff96;
+    transition: width 1s linear;
+  }
+
+  @media (max-width: 600px) {
+    h1 {
+      font-size: 1.5rem;
+    }
+
+    button {
+      font-size: 1rem;
+      padding: 15px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Download Your Video</h1>
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtlb2bW4117Cv5mzAZuDVzArCvuGRkE9MsdA&s" alt="Video Preview">
+  <button id="downloadBtn">⬇️ Download Now</button>
+  <p id="countdown"></p>
+  <div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+</div>
+
+<script>
+const downloadBtn = document.getElementById("downloadBtn");
+const countdownEl = document.getElementById("countdown");
+const progressBar = document.getElementById("progressBar");
+
+downloadBtn.addEventListener("click", () => {
+  let timeLeft = 5; // countdown seconds
+  countdownEl.textContent = `Wait ${timeLeft} seconds...`;
+  progressBar.style.width = "0%";
+
+  // Show popup ad
+  // Replace the URL below with your ads link
+  // Example: const adsLink = "https://youradslink.com";
+  const adsLink = "https://otieu.com/4/9929858"; // TODO: replace with your Ads URL
+  const adWindow = window.open(adsLink, "_blank", "width=500,height=600");
+
+  const countdownInterval = setInterval(() => {
+    timeLeft--;
+    countdownEl.textContent = `Wait ${timeLeft} seconds...`;
+    progressBar.style.width = `${((5 - timeLeft)/5)*100}%`;
+
+    if(timeLeft <= 0){
+      clearInterval(countdownInterval);
+      countdownEl.textContent = "Redirecting...";
+      progressBar.style.width = "100%";
+
+      // Close popup ad after countdown (optional)
+      if(adWindow) adWindow.close();
+
+      // Redirect to download link
+      // Replace the URL below with your video download link
+      const downloadLink = "https://otieu.com/4/9929858"; // TODO: replace with your download URL
+      window.location.href = downloadLink;
+    }
+  }, 1000);
+});
+</script>
+
+</body>
+</html>
